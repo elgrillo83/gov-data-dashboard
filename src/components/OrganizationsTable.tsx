@@ -1,5 +1,6 @@
 "use client";
 
+import { Card, CardContent, CardHeader } from "@mui/material";
 import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
 import { Organization } from "../types";
 
@@ -62,8 +63,15 @@ export default function OrganizationsTable({
   });
 
   return (
-    <div style={{ height: 500, width: "100%" }}>
-      <DataGrid rows={rows} columns={columns} />
-    </div>
+    <Card variant="outlined">
+      <CardHeader
+        subheader="As returned from `https://www.govdata.de/ckan/api/3/action/organization_list?all_fields=true`"
+        title="Organizations"
+      />
+
+      <CardContent sx={{ height: "500px", padding: 0 }}>
+        <DataGrid columns={columns} rows={rows} sx={{ border: 0 }} />
+      </CardContent>
+    </Card>
   );
 }
