@@ -1,5 +1,6 @@
-import { Box, CssBaseline } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import type { Metadata } from "next";
+import Layout from "../components/Layout";
 
 export const metadata: Metadata = {
   title: "GovData Dashboard",
@@ -17,9 +18,7 @@ export default function RootLayout({
       <body>
         <CssBaseline />
 
-        <Box component="main" minHeight="100vh" p={4}>
-          {children}
-        </Box>
+        <Layout>{children}</Layout>
       </body>
     </html>
   );
