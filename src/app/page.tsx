@@ -1,4 +1,5 @@
-import { Button } from "@mui/material";
+import { Typography } from "@mui/material";
+import PackageCountsByOrganizationChart from "../components/PackageCountsByOrganizationChart";
 import { Organization } from "../types";
 
 async function fetchOrganizationList() {
@@ -16,7 +17,7 @@ async function fetchOrganizationList() {
 export default async function Home() {
   const organizationList = await fetchOrganizationList();
 
-  const packageCountsByDisplayName = organizationList.result.reduce(
+  const packageCountsByOrganization = organizationList.result.reduce(
     (object: object, organization: Organization) => {
       return {
         ...object,
@@ -28,13 +29,11 @@ export default async function Home() {
 
   return (
     <main>
-      <Button variant="contained">Hello world</Button>
+      <Typography variant="h1">GovData Dashboard</Typography>
 
-      <pre>{JSON.stringify(packageCountsByDisplayName, null, 2)}</pre>
-
-      {organizationList && (
-        <pre>{JSON.stringify(organizationList, null, 2)}</pre>
-      )}
+      <PackageCountsByOrganizationChart
+        packageCountsByOrganization={packageCountsByOrganization}
+      />
     </main>
   );
 }

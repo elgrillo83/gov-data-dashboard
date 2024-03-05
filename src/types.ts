@@ -15,3 +15,7 @@ export type Organization = {
   title: string;
   type: string;
 };
+
+export type PackageCountsByOrganization = {
+  [key: string]: number;
+};
