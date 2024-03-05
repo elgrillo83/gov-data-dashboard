@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { Organization } from "../types";
 
 async function fetchOrganizationList() {
   const response = await fetch(
@@ -16,7 +17,7 @@ export default async function Home() {
   const organizationList = await fetchOrganizationList();
 
   const packageCountsByDisplayName = organizationList.result.reduce(
-    (object: object, organization) => {
+    (object: object, organization: Organization) => {
       return {
         ...object,
         [organization.display_name]: organization.package_count,
