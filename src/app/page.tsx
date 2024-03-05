@@ -1,8 +1,9 @@
 import { Stack, Typography } from "@mui/material";
+import OrganizationsTable from "../components/OrganizationsTable";
 import PackageCountsByOrganizationChart from "../components/PackageCountsByOrganizationChart";
 import { Organization } from "../types";
 
-async function fetchOrganizationList() {
+async function fetchOrganizations() {
   const response = await fetch(
     "https://www.govdata.de/ckan/api/3/action/organization_list?all_fields=true"
   );
@@ -15,9 +16,11 @@ async function fetchOrganizationList() {
 }
 
 export default async function Home() {
-  const organizationList = await fetchOrganizationList();
+  const organizationsResponse = await fetchOrganizations();
 
-  const packageCountsByOrganization = organizationList.result.reduce(
+  const organizations = organizationsResponse.result;
+
+  const packageCountsByOrganization = organizations.reduce(
     (object: object, organization: Organization) => {
       return {
         ...object,
@@ -31,9 +34,7 @@ export default async function Home() {
     <Stack spacing={4}>
       <Typography variant="h1">GovData Dashboard</Typography>
 
-      <PackageCountsByOrganizationChart
-        packageCountsByOrganization={packageCountsByOrganization}
-      />
+      <OrganizationsTable organizations={organizations} />
 
       <PackageCountsByOrganizationChart
         packageCountsByOrganization={packageCountsByOrganization}
