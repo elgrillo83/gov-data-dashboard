@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardHeader } from "@mui/material";
 import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
+import { ORGANIZATIONS_URL } from "../app/page";
 import { Organization } from "../types";
 
 const columns: GridColDef[] = [
@@ -65,7 +66,7 @@ export default function OrganizationsTable({
   return (
     <Card variant="outlined">
       <CardHeader
-        subheader="As returned from `https://www.govdata.de/ckan/api/3/action/organization_list?all_fields=true`"
+        subheader={`As returned from "${ORGANIZATIONS_URL}"`}
         title="Organizations"
       />
 

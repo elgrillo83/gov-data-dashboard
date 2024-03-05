@@ -3,10 +3,11 @@ import OrganizationsTable from "../components/OrganizationsTable";
 import PackageCountsByOrganizationChart from "../components/PackageCountsByOrganizationChart";
 import { Organization } from "../types";
 
+export const ORGANIZATIONS_URL =
+  "https://www.govdata.de/ckan/api/3/action/organization_list?all_fields=true";
+
 async function fetchOrganizations() {
-  const response = await fetch(
-    "https://www.govdata.de/ckan/api/3/action/organization_list?all_fields=true"
-  );
+  const response = await fetch(ORGANIZATIONS_URL);
 
   if (!response.ok) {
     throw new Error("Failed to fetch data");
