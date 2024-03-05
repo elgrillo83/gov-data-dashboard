@@ -19,7 +19,7 @@ export default function PackageCountsByOrganizationChart({
   }, [packageCountsByOrganization]);
 
   return (
-    <Card>
+    <Card variant="outlined">
       <CardHeader title="Package Counts By Organization" />
 
       <CardContent>
