@@ -69,7 +69,19 @@ export default function OrganizationsTable({
       />
 
       <CardContent sx={{ height: "500px", padding: 0 }}>
-        <DataGrid columns={columns} rows={rows} sx={{ border: 0 }} />
+        <DataGrid
+          initialState={{
+            columns: {
+              columnVisibilityModel: {
+                image_display_url: false,
+                image_url: false,
+              },
+            },
+          }}
+          columns={columns}
+          rows={rows}
+          sx={{ border: 0 }}
+        />
       </CardContent>
     </Card>
   );
