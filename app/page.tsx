@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-async function getData() {
+async function fetchOrganizationList() {
   const response = await fetch(
     "https://www.govdata.de/ckan/api/3/action/organization_list?all_fields=true"
   );
@@ -13,13 +13,27 @@ async function getData() {
 }
 
 export default async function Home() {
-  const data = await getData();
+  const organizationList = await fetchOrganizationList();
+
+  const packageCountsByDisplayName = organizationList.result.reduce(
+    (object: object, organization) => {
+      return {
+        ...object,
+        [organization.display_name]: organization.package_count,
+      };
+    },
+    {}
+  );
 
   return (
     <main>
       <Button variant="contained">Hello world</Button>
 
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+      <pre>{JSON.stringify(packageCountsByDisplayName, null, 2)}</pre>
+
+      {organizationList && (
+        <pre>{JSON.stringify(organizationList, null, 2)}</pre>
+      )}
     </main>
   );
 }
