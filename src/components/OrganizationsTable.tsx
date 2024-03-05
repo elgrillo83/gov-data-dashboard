@@ -42,8 +42,6 @@ export default function OrganizationsTable({
 }: {
   organizations: Organization[];
 }) {
-  console.log(organizations);
-
   const rows: GridRowsProp = organizations.map((organization) => {
     return {
       approval_status: organization.approval_status,
