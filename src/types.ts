@@ -1,3 +1,8 @@
+export type Department = {
+  name: string;
+  subordinates?: Department[];
+};
+
 export type Organization = {
   approval_status: string;
   created: string;

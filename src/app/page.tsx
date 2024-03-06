@@ -1,4 +1,5 @@
 import { Stack, Typography } from "@mui/material";
+import DepartmentsList from "../components/DepartmentsList";
 import OrganizationsTable from "../components/OrganizationsTable";
 import PackageCountsByOrganizationChart from "../components/PackageCountsByOrganizationChart";
 import { Organization } from "../types";
@@ -34,6 +35,8 @@ export default async function Home() {
   return (
     <Stack spacing={4}>
       <Typography variant="h1">GovData Dashboard</Typography>
+
+      <DepartmentsList />
 
       <OrganizationsTable organizations={organizations} />
 
