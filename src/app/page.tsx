@@ -2,8 +2,18 @@ import { Stack, Typography } from "@mui/material";
 import DepartmentsList from "../components/DepartmentsList";
 import OrganizationsTable from "../components/OrganizationsTable";
 import PackageCountsByOrganizationChart from "../components/PackageCountsByOrganizationChart";
+import TotalPackageCountsByDepartmentChart from "../components/TotalPackageCountsByDepartmentChart";
+import departmentsJson from "../data/departments.json";
 import organizationsListJson from "../data/organizations_list.json";
-import { Organization, PackageCountsByOrganization } from "../types";
+import {
+  addPackageCountToDepartment,
+  addTotalCountToDepartmentWithPackageCount,
+} from "../helpers";
+import {
+  DepartmentWithPackageAndTotalCount,
+  Organization,
+  PackageCountsByOrganization,
+} from "../types";
 
 export const ORGANIZATIONS_URL =
   "https://www.govdata.de/ckan/api/3/action/organization_list?all_fields=true";
@@ -36,12 +46,29 @@ export default async function Home() {
       };
     }, {});
 
+  const departments = departmentsJson.departments;
+
+  const departmentsWithPackageCounts = departments.map((department) =>
+    addPackageCountToDepartment(department, packageCountsByOrganization)
+  );
+
+  const departmentsWithPackageAndTotalCounts: DepartmentWithPackageAndTotalCount[] =
+    departmentsWithPackageCounts.map(addTotalCountToDepartmentWithPackageCount);
+
   return (
     <Stack spacing={4}>
       <Typography variant="h1">GovData Dashboard</Typography>
 
+      <TotalPackageCountsByDepartmentChart
+        departmentsWithPackageAndTotalCounts={
+          departmentsWithPackageAndTotalCounts
+        }
+      />
+
       <DepartmentsList
-        packageCountsByOrganization={packageCountsByOrganization}
+        departmentsWithPackageAndTotalCounts={
+          departmentsWithPackageAndTotalCounts
+        }
       />
 
       <OrganizationsTable organizations={organizations} />

@@ -1,32 +1,15 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
 import List from "@mui/material/List";
-import departmentsJson from "../data/departments.json";
-import {
-  addPackageCountToDepartment,
-  addTotalCountToDepartmentWithPackageCount,
-} from "../helpers";
-import {
-  DepartmentWithPackageAndTotalCount,
-  PackageCountsByOrganization,
-} from "../types";
+import { DepartmentWithPackageAndTotalCount } from "../types";
 import DepartmentListItem from "./DepartmentListItem";
 
 type DepartmentsListProps = {
-  packageCountsByOrganization: PackageCountsByOrganization;
+  departmentsWithPackageAndTotalCounts: DepartmentWithPackageAndTotalCount[];
 };
 
 export default function DepartmentsList({
-  packageCountsByOrganization,
+  departmentsWithPackageAndTotalCounts,
 }: DepartmentsListProps) {
-  const departments = departmentsJson.departments;
-
-  const departmentsWithPackageCounts = departments.map((department) =>
-    addPackageCountToDepartment(department, packageCountsByOrganization)
-  );
-
-  const departmentsWithPackageAndTotalCounts: DepartmentWithPackageAndTotalCount[] =
-    departmentsWithPackageCounts.map(addTotalCountToDepartmentWithPackageCount);
-
   return (
     <Card variant="outlined">
       <CardHeader
