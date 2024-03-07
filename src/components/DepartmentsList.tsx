@@ -2,8 +2,11 @@ import { Card, CardContent, CardHeader } from "@mui/material";
 import List from "@mui/material/List";
 import departmentsJson from "../data/departments.json";
 import {
-  Department,
-  DepartmentWithPackageCount,
+  addPackageCountToDepartment,
+  addTotalCountToDepartmentWithPackageCount,
+} from "../helpers";
+import {
+  DepartmentWithPackageAndTotalCount,
   PackageCountsByOrganization,
 } from "../types";
 import DepartmentListItem from "./DepartmentListItem";
@@ -17,19 +20,12 @@ export default function DepartmentsList({
 }: DepartmentsListProps) {
   const departments = departmentsJson.departments;
 
-  const addPackageCountToDepartment = (
-    department: Department
-  ): DepartmentWithPackageCount => {
-    return {
-      ...department,
-      packageCount: packageCountsByOrganization[department.name] || 0,
-      subordinates: department.subordinates?.map(addPackageCountToDepartment),
-    };
-  };
-
-  const departmentsWithPackageCounts = departments.map(
-    addPackageCountToDepartment
+  const departmentsWithPackageCounts = departments.map((department) =>
+    addPackageCountToDepartment(department, packageCountsByOrganization)
   );
+
+  const departmentsWithPackageAndTotalCounts: DepartmentWithPackageAndTotalCount[] =
+    departmentsWithPackageCounts.map(addTotalCountToDepartmentWithPackageCount);
 
   return (
     <Card variant="outlined">
@@ -40,12 +36,16 @@ export default function DepartmentsList({
 
       <CardContent sx={{ padding: 0 }}>
         <List aria-label="departments-list" dense>
-          {departmentsWithPackageCounts.map((departmentWithPackageCount) => (
-            <DepartmentListItem
-              departmentWithPackageCount={departmentWithPackageCount}
-              key={departmentWithPackageCount.name}
-            />
-          ))}
+          {departmentsWithPackageAndTotalCounts.map(
+            (departmentWithPackageAndTotalCounts) => (
+              <DepartmentListItem
+                departmentWithPackageAndTotalCounts={
+                  departmentWithPackageAndTotalCounts
+                }
+                key={departmentWithPackageAndTotalCounts.name}
+              />
+            )
+          )}
         </List>
       </CardContent>
     </Card>

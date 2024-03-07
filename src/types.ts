@@ -9,6 +9,13 @@ export type DepartmentWithPackageCount = {
   subordinates?: DepartmentWithPackageCount[];
 };
 
+export type DepartmentWithPackageAndTotalCount = {
+  name: string;
+  packageCount: number;
+  subordinates?: DepartmentWithPackageCount[];
+  totalPackageCount: number;
+};
+
 export type Organization = {
   approval_status: string;
   created: string;

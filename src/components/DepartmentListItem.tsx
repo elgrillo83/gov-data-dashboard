@@ -2,44 +2,63 @@ import {
   Museum as DepartmentIcon,
   Foundation as SubordinateIcon,
 } from "@mui/icons-material";
-import { Chip, List, ListItemIcon } from "@mui/material";
+import { Chip, List, ListItemIcon, Stack } from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { DepartmentWithPackageCount } from "../types";
+import { DepartmentWithPackageAndTotalCount } from "../types";
 
 type DepartmentListItemProps = {
-  departmentWithPackageCount: DepartmentWithPackageCount;
+  departmentWithPackageAndTotalCounts: DepartmentWithPackageAndTotalCount;
   nestingLevel?: number;
 };
 
 export default function DepartmentListItem({
-  departmentWithPackageCount,
+  departmentWithPackageAndTotalCounts,
   nestingLevel = 1,
 }: DepartmentListItemProps) {
   return (
     <>
       <ListItemButton
-        key={departmentWithPackageCount.name}
+        key={departmentWithPackageAndTotalCounts.name}
         sx={{ pl: 2 * nestingLevel }}
       >
         <ListItemIcon>
-          {nestingLevel === 1 ? <DepartmentIcon /> : <SubordinateIcon />}
+          {nestingLevel === 1 ? (
+            <DepartmentIcon color="primary" />
+          ) : (
+            <SubordinateIcon />
+          )}
         </ListItemIcon>
 
-        <ListItemText primary={departmentWithPackageCount.name} />
+        <ListItemText primary={departmentWithPackageAndTotalCounts.name} />
 
-        <Chip label={departmentWithPackageCount.packageCount} size="small" />
+        <Stack direction="row" spacing={1}>
+          {departmentWithPackageAndTotalCounts.totalPackageCount >= 0 && (
+            <Chip
+              label={departmentWithPackageAndTotalCounts.totalPackageCount}
+              size="small"
+              color="primary"
+            />
+          )}
+
+          <Chip
+            label={departmentWithPackageAndTotalCounts.packageCount}
+            size="small"
+          />
+        </Stack>
       </ListItemButton>
 
-      {departmentWithPackageCount.subordinates && (
+      {departmentWithPackageAndTotalCounts.subordinates && (
         <List component="div" dense>
-          {departmentWithPackageCount.subordinates.map((subordinate) => (
-            <DepartmentListItem
-              departmentWithPackageCount={subordinate}
-              key={subordinate.name}
-              nestingLevel={nestingLevel + 1}
-            />
-          ))}
+          {departmentWithPackageAndTotalCounts.subordinates.map(
+            (subordinate) => (
+              <DepartmentListItem
+                departmentWithPackageAndTotalCounts={subordinate}
+                key={subordinate.name}
+                nestingLevel={nestingLevel + 1}
+              />
+            )
+          )}
         </List>
       )}
     </>
