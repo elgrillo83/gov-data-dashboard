@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
 import { DepartmentWithPackageAndTotalCount } from "../types";
+import PageNavigationCardActions from "./PageNavigationCardActions";
 
 export default function TotalPackageCountsByDepartmentChart({
   departmentsWithPackageAndTotalCounts,
@@ -20,15 +21,17 @@ export default function TotalPackageCountsByDepartmentChart({
   );
 
   return (
-    <Card variant="outlined">
+    <Card
+      sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+      variant="outlined"
+    >
       <CardHeader
-        subheader="Subheader"
-        title="Total Package Counts By Department"
+        subheader="Total package counts by departments including subordinated organizations."
+        title="Departments Chart"
       />
 
-      <CardContent>
+      <CardContent sx={{ flexGrow: 1 }}>
         <BarChart
-          height={300}
           series={[
             {
               data: values,
@@ -48,6 +51,8 @@ export default function TotalPackageCountsByDepartmentChart({
           ]}
         />
       </CardContent>
+
+      <PageNavigationCardActions />
     </Card>
   );
 }

@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader } from "@mui/material";
 import List from "@mui/material/List";
 import { DepartmentWithPackageAndTotalCount } from "../types";
 import DepartmentListItem from "./DepartmentListItem";
+import PageNavigationCardActions from "./PageNavigationCardActions";
 
 type DepartmentsListProps = {
   departmentsWithPackageAndTotalCounts: DepartmentWithPackageAndTotalCount[];
@@ -11,14 +12,17 @@ export default function DepartmentsList({
   departmentsWithPackageAndTotalCounts,
 }: DepartmentsListProps) {
   return (
-    <Card variant="outlined">
+    <Card
+      sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+      variant="outlined"
+    >
       <CardHeader
-        subheader='As stored in "departments.json"'
-        title="Departments"
+        subheader="Departments including subordinated organizations."
+        title="Departments List"
       />
 
-      <CardContent sx={{ padding: 0 }}>
-        <List aria-label="departments-list" dense>
+      <CardContent sx={{ flexGrow: 1, overflow: "auto", padding: 0 }}>
+        <List dense>
           {departmentsWithPackageAndTotalCounts.map(
             (departmentWithPackageAndTotalCounts) => (
               <DepartmentListItem
@@ -31,6 +35,8 @@ export default function DepartmentsList({
           )}
         </List>
       </CardContent>
+
+      <PageNavigationCardActions />
     </Card>
   );
 }

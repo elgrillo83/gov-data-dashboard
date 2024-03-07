@@ -20,7 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <AppBar sx={{ flexShrink: 0 }} />
 
-        <Box component="main" flexGrow={1} overflow="auto">
+        <Box component="main" flexGrow={1} minHeight={0}>
           {children}
         </Box>
       </Box>

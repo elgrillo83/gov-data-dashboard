@@ -1,15 +1,6 @@
-import { Stack } from "@mui/material";
-import departmentsJson from "../data/departments.json";
-import organizationsListJson from "../data/organizations_list.json";
-import {
-  addPackageCountToDepartment,
-  addTotalCountToDepartmentWithPackageCount,
-} from "../helpers";
-import {
-  DepartmentWithPackageAndTotalCount,
-  Organization,
-  PackageCountsByOrganization,
-} from "../types";
+import PackageCountsByOrganizationChart from "@/src/components/PackageCountsByOrganizationChart";
+import organizationsListJson from "../../data/organizations_list.json";
+import { Organization, PackageCountsByOrganization } from "../../types";
 
 export const ORGANIZATIONS_URL =
   "https://www.govdata.de/ckan/api/3/action/organization_list?all_fields=true";
@@ -42,14 +33,9 @@ export default async function Home() {
       };
     }, {});
 
-  const departments = departmentsJson.departments;
-
-  const departmentsWithPackageCounts = departments.map((department) =>
-    addPackageCountToDepartment(department, packageCountsByOrganization)
+  return (
+    <PackageCountsByOrganizationChart
+      packageCountsByOrganization={packageCountsByOrganization}
+    />
   );
-
-  const departmentsWithPackageAndTotalCounts: DepartmentWithPackageAndTotalCount[] =
-    departmentsWithPackageCounts.map(addTotalCountToDepartmentWithPackageCount);
-
-  return <Stack spacing={4}></Stack>;
 }

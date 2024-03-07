@@ -2,8 +2,8 @@
 
 import { Card, CardContent, CardHeader } from "@mui/material";
 import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
-import { ORGANIZATIONS_URL } from "../app/page";
 import { Organization } from "../types";
+import PageNavigationCardActions from "./PageNavigationCardActions";
 
 const columns: GridColDef[] = [
   { field: "display_name", headerName: "Display Name", width: 250 },
@@ -62,13 +62,16 @@ export default function OrganizationsTable({
   });
 
   return (
-    <Card variant="outlined">
+    <Card
+      sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+      variant="outlined"
+    >
       <CardHeader
-        subheader={`As returned from "${ORGANIZATIONS_URL}"`}
-        title="Organizations"
+        subheader="Including package counts"
+        title="Organizations Table"
       />
 
-      <CardContent sx={{ height: "500px", padding: 0 }}>
+      <CardContent sx={{ flexGrow: 1, height: "100px", padding: 0 }}>
         <DataGrid
           initialState={{
             columns: {
@@ -83,6 +86,8 @@ export default function OrganizationsTable({
           sx={{ border: 0 }}
         />
       </CardContent>
+
+      <PageNavigationCardActions />
     </Card>
   );
 }

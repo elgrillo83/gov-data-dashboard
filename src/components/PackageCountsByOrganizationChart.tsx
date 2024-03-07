@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
 import { useMemo } from "react";
 import { PackageCountsByOrganization } from "../types";
+import PageNavigationCardActions from "./PageNavigationCardActions";
 
 export default function PackageCountsByOrganizationChart({
   packageCountsByOrganization,
@@ -19,12 +20,17 @@ export default function PackageCountsByOrganizationChart({
   }, [packageCountsByOrganization]);
 
   return (
-    <Card variant="outlined">
-      <CardHeader title="Package Counts By Organization" />
+    <Card
+      sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+      variant="outlined"
+    >
+      <CardHeader
+        subheader="Excluding organizations with a zero packages count"
+        title="Organizations Chart"
+      />
 
-      <CardContent>
+      <CardContent sx={{ flexGrow: 1 }}>
         <BarChart
-          height={300}
           series={[
             {
               data: Object.values(sanitizedPackageCountsByOrganization),
@@ -44,6 +50,8 @@ export default function PackageCountsByOrganizationChart({
           ]}
         />
       </CardContent>
+
+      <PageNavigationCardActions />
     </Card>
   );
 }
