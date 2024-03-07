@@ -3,6 +3,12 @@ export type Department = {
   subordinates?: Department[];
 };
 
+export type DepartmentWithPackageCount = {
+  name: string;
+  packageCount: number;
+  subordinates?: DepartmentWithPackageCount[];
+};
+
 export type Organization = {
   approval_status: string;
   created: string;

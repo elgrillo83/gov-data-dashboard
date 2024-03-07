@@ -5,32 +5,37 @@ import {
 import { Chip, List, ListItemIcon } from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { Department } from "../types";
+import { DepartmentWithPackageCount } from "../types";
+
+type DepartmentListItemProps = {
+  departmentWithPackageCount: DepartmentWithPackageCount;
+  nestingLevel?: number;
+};
 
 export default function DepartmentListItem({
-  department,
+  departmentWithPackageCount,
   nestingLevel = 1,
-}: {
-  department: Department;
-  nestingLevel?: number;
-}) {
+}: DepartmentListItemProps) {
   return (
     <>
-      <ListItemButton key={department.name} sx={{ pl: 2 * nestingLevel }}>
+      <ListItemButton
+        key={departmentWithPackageCount.name}
+        sx={{ pl: 2 * nestingLevel }}
+      >
         <ListItemIcon>
           {nestingLevel === 1 ? <DepartmentIcon /> : <SubordinateIcon />}
         </ListItemIcon>
 
-        <ListItemText primary={department.name} />
+        <ListItemText primary={departmentWithPackageCount.name} />
 
-        <Chip label="packages count" size="small" />
+        <Chip label={departmentWithPackageCount.packageCount} size="small" />
       </ListItemButton>
 
-      {department.subordinates && (
+      {departmentWithPackageCount.subordinates && (
         <List component="div" dense>
-          {department.subordinates.map((subordinate) => (
+          {departmentWithPackageCount.subordinates.map((subordinate) => (
             <DepartmentListItem
-              department={subordinate}
+              departmentWithPackageCount={subordinate}
               key={subordinate.name}
               nestingLevel={nestingLevel + 1}
             />
