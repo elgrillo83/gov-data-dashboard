@@ -34,6 +34,8 @@ export const pages = [
 export default function AppBar({ sx }: { sx: SxProps }) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
+  const pathname = usePathname();
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -88,6 +90,7 @@ export default function AppBar({ sx }: { sx: SxProps }) {
               href={page.path}
               key={page.path}
               onClick={handleCloseNavMenu}
+              selected={page.path === pathname}
             >
               {page.title}
             </MenuItem>
