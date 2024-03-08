@@ -5,6 +5,7 @@ import {
   KeyboardArrowLeft as PreviousIcon,
 } from "@mui/icons-material";
 import { Button, CardActions } from "@mui/material";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { pages } from "./AppBar";
 
@@ -42,6 +43,7 @@ export default function PageNavigationCardActions() {
     <CardActions sx={{ justifyContent: justifyContent }}>
       {previousPage && (
         <Button
+          LinkComponent={Link}
           color="primary"
           href={previousPage.path}
           size="small"

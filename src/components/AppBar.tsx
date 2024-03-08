@@ -8,6 +8,8 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export const pages = [
@@ -81,6 +83,7 @@ export default function AppBar({ sx }: { sx: SxProps }) {
         >
           {pages.map((page) => (
             <MenuItem
+              LinkComponent={Link}
               component="a"
               href={page.path}
               key={page.path}
