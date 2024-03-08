@@ -11,25 +11,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-
-export const pages = [
-  {
-    path: "/departments_chart",
-    title: "Departments Chart",
-  },
-  {
-    path: "/departments_list",
-    title: "Departments List",
-  },
-  {
-    path: "/organizations_chart",
-    title: "Organizations Chart",
-  },
-  {
-    path: "/organizations_table",
-    title: "Organizations Table",
-  },
-];
+import { pages } from "../pages";
 
 export default function AppBar({ sx }: { sx: SxProps }) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);

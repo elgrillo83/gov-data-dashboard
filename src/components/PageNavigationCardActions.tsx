@@ -7,7 +7,7 @@ import {
 import { Button, CardActions } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { pages } from "./AppBar";
+import { pages } from "../pages";
 
 export default function PageNavigationCardActions() {
   const pathname = usePathname();
