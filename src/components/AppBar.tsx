@@ -48,22 +48,13 @@ export default function AppBar({ sx }: { sx: SxProps }) {
         </IconButton>
 
         <Menu
-          id="menu-appbar"
           anchorEl={anchorElNav}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          id="menu-appbar"
           keepMounted
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          open={Boolean(anchorElNav)}
           onClose={handleCloseNavMenu}
-          sx={{
-            display: { xs: "block", md: "none" },
-          }}
+          open={Boolean(anchorElNav)}
+          transformOrigin={{ vertical: "top", horizontal: "left" }}
         >
           {pages.map((page) => (
             <MenuItem
