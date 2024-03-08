@@ -1,9 +1,8 @@
 "use client";
 
-import { Card, CardContent, CardHeader } from "@mui/material";
 import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
 import { Organization } from "../types";
-import PageNavigationCardActions from "./PageNavigationCardActions";
+import CustomCard from "./shared/CustomCard";
 
 const columns: GridColDef[] = [
   { field: "display_name", headerName: "Display Name", width: 250 },
@@ -62,32 +61,24 @@ export default function OrganizationsTable({
   });
 
   return (
-    <Card
-      sx={{ display: "flex", flexDirection: "column", height: "100%" }}
-      variant="outlined"
+    <CustomCard
+      contentSx={{ height: "100px", padding: 0 }}
+      subheader="Including package counts"
+      title="Organizations Table"
     >
-      <CardHeader
-        subheader="Including package counts"
-        title="Organizations Table"
-      />
-
-      <CardContent sx={{ flexGrow: 1, height: "100px", padding: 0 }}>
-        <DataGrid
-          initialState={{
-            columns: {
-              columnVisibilityModel: {
-                image_display_url: false,
-                image_url: false,
-              },
+      <DataGrid
+        initialState={{
+          columns: {
+            columnVisibilityModel: {
+              image_display_url: false,
+              image_url: false,
             },
-          }}
-          columns={columns}
-          rows={rows}
-          sx={{ border: 0 }}
-        />
-      </CardContent>
-
-      <PageNavigationCardActions />
-    </Card>
+          },
+        }}
+        columns={columns}
+        rows={rows}
+        sx={{ border: 0 }}
+      />
+    </CustomCard>
   );
 }

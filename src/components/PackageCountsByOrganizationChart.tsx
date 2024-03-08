@@ -1,10 +1,9 @@
 "use client";
 
-import { Card, CardContent, CardHeader } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
 import { useMemo } from "react";
 import { PackageCountsByOrganization } from "../types";
-import PageNavigationCardActions from "./PageNavigationCardActions";
+import CustomCard from "./shared/CustomCard";
 
 export default function PackageCountsByOrganizationChart({
   packageCountsByOrganization,
@@ -20,38 +19,29 @@ export default function PackageCountsByOrganizationChart({
   }, [packageCountsByOrganization]);
 
   return (
-    <Card
-      sx={{ display: "flex", flexDirection: "column", height: "100%" }}
-      variant="outlined"
+    <CustomCard
+      subheader="Excluding organizations with a zero packages count"
+      title="Organizations Chart"
     >
-      <CardHeader
-        subheader="Excluding organizations with a zero packages count"
-        title="Organizations Chart"
+      <BarChart
+        series={[
+          {
+            data: Object.values(packageCountsByOrganization),
+          },
+        ]}
+        xAxis={[
+          {
+            data: Object.keys(packageCountsByOrganization),
+            id: "packageCountsByOrganization",
+            scaleType: "band",
+            tickLabelStyle: {
+              angle: 90,
+              textAnchor: "start",
+              fontSize: 12,
+            },
+          },
+        ]}
       />
-
-      <CardContent sx={{ flexGrow: 1 }}>
-        <BarChart
-          series={[
-            {
-              data: Object.values(sanitizedPackageCountsByOrganization),
-            },
-          ]}
-          xAxis={[
-            {
-              data: Object.keys(sanitizedPackageCountsByOrganization),
-              id: "packageCountsByOrganization",
-              scaleType: "band",
-              tickLabelStyle: {
-                angle: 90,
-                textAnchor: "start",
-                fontSize: 16,
-              },
-            },
-          ]}
-        />
-      </CardContent>
-
-      <PageNavigationCardActions />
-    </Card>
+    </CustomCard>
   );
 }
