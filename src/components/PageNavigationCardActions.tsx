@@ -59,6 +59,7 @@ export default function PageNavigationCardActions() {
           endIcon={<NextIcon />}
           href={nextPage.path}
           size="small"
+          sx={{ textAlign: "right" }}
         >
           {nextPage.title}
         </Button>
