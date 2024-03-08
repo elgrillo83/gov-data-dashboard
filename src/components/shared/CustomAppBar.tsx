@@ -1,9 +1,9 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import {
+  AppBar,
   IconButton,
   Menu,
   MenuItem,
-  AppBar as MuiAppBar,
   SxProps,
   Toolbar,
   Typography,
@@ -11,9 +11,9 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { pages } from "../pages";
+import { pages } from "../../pages";
 
-export default function AppBar({ sx }: { sx: SxProps }) {
+export default function CustomAppBar({ sx }: { sx: SxProps }) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const pathname = usePathname();
@@ -27,7 +27,7 @@ export default function AppBar({ sx }: { sx: SxProps }) {
   };
 
   return (
-    <MuiAppBar
+    <AppBar
       color="transparent"
       elevation={0}
       position="static"
@@ -74,6 +74,6 @@ export default function AppBar({ sx }: { sx: SxProps }) {
           GovData Dashboard
         </Typography>
       </Toolbar>
-    </MuiAppBar>
+    </AppBar>
   );
 }

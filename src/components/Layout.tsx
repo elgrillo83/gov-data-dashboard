@@ -3,7 +3,7 @@
 import { Box, ThemeProvider } from "@mui/material";
 import useIsMobile from "../hooks/useIsMobile";
 import theme from "../theme";
-import AppBar from "./AppBar";
+import CustomAppBar from "./shared/CustomAppBar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const isMobile = useIsMobile();
@@ -18,7 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         overflow="hidden"
         p={isMobile ? 1 : 4}
       >
-        <AppBar sx={{ flexShrink: 0 }} />
+        <CustomAppBar sx={{ flexShrink: 0 }} />
 
         <Box component="main" flexGrow={1} minHeight={0}>
           {children}
