@@ -12,24 +12,16 @@ import { pages } from "./AppBar";
 export default function PageNavigationCardActions() {
   const pathname = usePathname();
 
-  console.log("pathname", pathname);
-
-  const foo = pages;
-  const page = foo.find((page) => page.path === pathname);
+  const page = pages.find((page) => page.path === pathname);
 
   if (!page) return null;
 
-  const previousPageIndex = foo.indexOf(page) - 1;
+  const previousPageIndex = pages.indexOf(page) - 1;
   const previousPage =
-    foo[previousPageIndex < 0 ? foo.length - 1 : previousPageIndex];
+    pages[previousPageIndex < 0 ? pages.length - 1 : previousPageIndex];
 
-  const nextPageIndex = (foo.indexOf(page) + 1) % foo.length;
-  const nextPage = foo[nextPageIndex];
-
-  debugger;
-
-  console.log("previousPage", previousPage);
-  console.log("nextPage", nextPage);
+  const nextPageIndex = (pages.indexOf(page) + 1) % pages.length;
+  const nextPage = pages[nextPageIndex];
 
   if (!previousPage && !nextPage) return null;
 
