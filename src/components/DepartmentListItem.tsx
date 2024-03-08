@@ -1,6 +1,6 @@
 import {
   Museum as DepartmentIcon,
-  Foundation as SubordinateIcon,
+  Home as SubordinateIcon,
 } from "@mui/icons-material";
 import { Chip, List, ListItemIcon, Stack } from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
